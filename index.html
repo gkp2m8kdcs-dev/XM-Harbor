@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XM Harbor — Personal Finance & Portfolio Tracker</title>
+<meta name="description" content="XM Harbor is an on-device personal finance journal and portfolio tracker. Track net worth, transactions, investments, budgets, and goals — all stored privately on your iPhone.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: #0a0a0f;
+    color: #e8e8ee;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 70%);
+    text-align: center;
+  }
+  .app-icon {
+    width: 140px;
+    height: 140px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, #2a2a3e 0%, #0f0f1a 100%);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    font-weight: 200;
+    color: #f0f0f5;
+    margin-bottom: 36px;
+    letter-spacing: -3px;
+  }
+  h1 {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    margin-bottom: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #a0a0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    font-size: 20px;
+    color: #8888a0;
+    margin-bottom: 48px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  .badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .badge {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    font-size: 13px;
+    color: #b0b0c0;
+  }
+  .cta {
+    padding: 16px 36px;
+    background: linear-gradient(180deg, #ffffff 0%, #d0d0d8 100%);
+    color: #0a0a0f;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 8px 24px rgba(255,255,255,0.1);
+    transition: transform 0.2s;
+  }
+  .cta:hover { transform: translateY(-2px); }
+
+  section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h2 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .section-sub {
+    font-size: 18px;
+    color: #8888a0;
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .feature {
+    padding: 28px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+  }
+  .feature-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    text-align: center;
+    line-height: 48px;
+  }
+  .feature h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .feature p {
+    color: #9090a0;
+    font-size: 15px;
+  }
+  .privacy-banner {
+    margin: 80px 24px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 48px;
+    background: linear-gradient(135deg, rgba(80,120,255,0.08) 0%, rgba(40,80,180,0.04) 100%);
+    border: 1px solid rgba(120,150,255,0.2);
+    border-radius: 24px;
+    text-align: center;
+  }
+  .privacy-banner h2 { font-size: 32px; margin-bottom: 12px; }
+  .privacy-banner p { color: #b0b0c0; font-size: 17px; max-width: 640px; margin: 0 auto 24px; }
+  .privacy-banner a {
+    color: #7aa0ff;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(122,160,255,0.4);
+  }
+  footer {
+    padding: 48px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: #686878;
+    font-size: 14px;
+  }
+  footer a {
+    color: #8888a0;
+    text-decoration: none;
+    margin: 0 12px;
+  }
+  footer a:hover { color: #ffffff; }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 40px; }
+    h2 { font-size: 30px; }
+    .subtitle { font-size: 16px; }
+    .app-icon { width: 110px; height: 110px; font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="app-icon">XM</div>
+  <h1>XM Harbor</h1>
+  <p class="subtitle">Personal Finance Journal · Portfolio Tracker · Investment Analyzer</p>
+  <div class="badges">
+    <span class="badge">iOS 16+</span>
+    <span class="badge">iPhone</span>
+    <span class="badge">On-Device Only</span>
+    <span class="badge">No Subscription</span>
+    <span class="badge">No Tracking</span>
+  </div>
+  <a href="#" class="cta">View on the App Store</a>
+</section>
+
+<section>
+  <h2>Your money, in one place.</h2>
+  <p class="section-sub">
+    XM Harbor is a personal finance journal and portfolio tracker for investors who want a clear, on-device view of where their money actually is. No brokerage connection. No cloud. Just your numbers.
+  </p>
+
+  <div class="features">
+    <div class="feature">
+      <span class="feature-icon">◐</span>
+      <h3>Net-Worth Overview</h3>
+      <p>Open with a net-worth hero, a cash-flow sparkline, and your Liquid versus Invested split at a glance.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">≡</span>
+      <h3>Activity Journal</h3>
+      <p>Transactions grouped by day with quick filters, search, and one-tap receipt attachment from camera or photo library.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">▦</span>
+      <h3>Multi-Lot Portfolio</h3>
+      <p>Track every holding, lot, cost basis, and average cost across stocks, ETFs, bonds, crypto, real estate, and commodities.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">◍</span>
+      <h3>Asset Mix</h3>
+      <p>Interactive donut chart you can tap to drill into. Built from your entries — never from a brokerage feed.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">⌐</span>
+      <h3>Custom Reports</h3>
+      <p>Six-month cash-flow, monthly income versus expense, daily spending trend, category breakdown, and account distribution — drawn as SwiftUI charts.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">◎</span>
+      <h3>Goals & Budgets</h3>
+      <p>Set a target, see a progress bar. Stay minimal — and stay on track.</p>
+    </div>
+  </div>
+</section>
+
+<div class="privacy-banner">
+  <h2>Private by design.</h2>
+  <p>
+    XM Harbor is on-device only. No account. No cloud. No analytics. No ads. No tracking of any kind. All transactions, holdings, budgets, goals, accounts, and receipt photos live in a private store on this iPhone.
+  </p>
+  <a href="privacy.html">Read the full Privacy Policy →</a>
+</div>
+
+<footer>
+  <p>© 2026 XM Harbor. All rights reserved.</p>
+  <p style="margin-top:16px;">
+    <a href="privacy.html">Privacy</a> ·
+    <a href="support.html">Support</a> ·
+    <a href="terms.html">Terms of Use</a>
+  </p>
+  <p style="margin-top:16px;">
+    Contact: <a href="mailto:dhfu94086@gmail.com">dhfu94086@gmail.com</a>
+  </p>
+</footer>
+
+</body>
+</html>
